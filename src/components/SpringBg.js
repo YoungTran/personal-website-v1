@@ -1,6 +1,6 @@
 import React from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
-const url = (name, wrap = false) =>
+export const url = (name, wrap = false) =>
   `${
     wrap ? "url(" : ""
   }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
@@ -23,6 +23,7 @@ export default function SpringBg() {
         <img
           src={url("cloud")}
           style={{ display: "block", width: "20%", marginLeft: "60%" }}
+          alt="cloudImage1"
         />
         <img
           src={url("cloud")}
@@ -32,6 +33,7 @@ export default function SpringBg() {
             marginLeft: "30%",
             marginTop: "25%",
           }}
+          alt="cloudImage2"
         />
         <img
           src={url("cloud")}
@@ -41,16 +43,19 @@ export default function SpringBg() {
             marginLeft: "80%",
             marginTop: "60%",
           }}
+          alt="cloudImage3"
         />
       </ParallaxLayer>
       <ParallaxLayer offset={4} speed={0.2} style={{ opacity: 0.2 }}>
         <img
           src={url("cloud")}
           style={{ display: "block", width: "10%", marginLeft: "10%" }}
+          alt="cloudImage4"
         />
         <img
           src={url("cloud")}
           style={{ display: "block", width: "20%", marginLeft: "75%" }}
+          alt="cloudImage5"
         />
       </ParallaxLayer>
       <ParallaxLayer
@@ -64,13 +69,14 @@ export default function SpringBg() {
       />
 
       <ParallaxLayer
-        offset={1.5}
+        offset={2.2}
         speed={-0.3}
         style={{ pointerEvents: "none" }}
       >
         <img
           src={url("satellite4")}
-          style={{ width: "15%", marginLeft: "80%" }}
+          style={{ width: "20%", marginLeft: "60%" }}
+          alt="satellite4"
         />
       </ParallaxLayer>
 
@@ -78,10 +84,12 @@ export default function SpringBg() {
         <img
           src={url("cloud")}
           style={{ display: "block", width: "20%", marginLeft: "55%" }}
+          alt="cloudImage6"
         />
         <img
           src={url("cloud")}
           style={{ display: "block", width: "10%", marginLeft: "15%" }}
+          alt="cloudImage7"
         />
       </ParallaxLayer>
 
@@ -89,6 +97,7 @@ export default function SpringBg() {
         <img
           src={url("cloud")}
           style={{ display: "block", width: "20%", marginLeft: "70%" }}
+          alt="cloudImage8"
         />
         {/* <img
             src={url("cloud")}

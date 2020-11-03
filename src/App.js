@@ -1,33 +1,34 @@
-import { Hidden, Typography } from "@material-ui/core";
-import React from "react";
-import { useSpring } from "react-spring";
+import { Hidden } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import { Parallax, ParallaxLayer } from "react-spring/renderprops-addons";
 import "./App.css";
-import About from "./components/Dashboard/About";
-import Appbar from "./components/Dashboard/Appbar";
-import BottomNav from "./components/Dashboard/BottomNav";
-import Contact from "./components/Dashboard/Contact";
-import Experience from "./components/Dashboard/Experience";
-import Header from "./components/Dashboard/Header";
-import SpringBg from "./components/Dashboard/SpringBg";
-import WorkTest from "./components/Dashboard/WorkTest";
+import About from "./components/About";
+import { getRepos } from "./components/api/getRepos";
+import Appbar from "./components/Appbar";
+import BottomNav from "./components/BottomNav";
+import Contact from "./components/Contact";
+import Experience from "./components/Experience";
+import Header from "./components/Header";
+import SpringBg from "./components/SpringBg";
+import Work from "./components/Work";
+
 export const parallax = React.createRef();
 
 export const themeColors = {
   first: {
-    color: "#637497",
+    color: "#2D3244",
   },
   second: {
     color: "#c4cad6",
   },
   third: {
-    color: "#b8bbce",
+    color: "#2D3244",
   },
   fourth: {
     color: "#d2d8d1",
   },
   fifth: {
-    color: "#faf9f7",
+    color: "#F9F9FA",
   },
 };
 const url = (name, wrap = false) =>
@@ -38,48 +39,68 @@ const url = (name, wrap = false) =>
   }`;
 
 function App() {
-  const props = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-  });
+  const fetchRepo = async () => {
+    const repos = await getRepos();
+    return repos;
+  };
+  const [repos, setRepos] = useState([]);
+  useEffect(() => {
+    const reposPromise = fetchRepo();
+    reposPromise.then((res) => {
+      setRepos(res);
+    });
+  }, []);
+
   return (
     <div
       style={{
         minHeight: "100vh",
-        display: "grid",
-        gridTemplateRows: "1fr auto",
         backgroundColor: themeColors.third.color,
-        gridTemplateColumns: "100%",
       }}
     >
       <Appbar parallax={parallax} />
-      <div className="side">
-        <Typography>Designed and Built by Young</Typography>
-      </div>
+      <Hidden smDown>
+        <div className="side">
+          <span style={{ color: themeColors.fifth.color, fontWeight: 600 }}>
+            Made with{" "}
+          </span>
+          <span className="heart" role="img" aria-label="heart-emoji">
+            ❤️
+          </span>
+          <span style={{ color: themeColors.fifth.color, fontWeight: 600 }}>
+            {" "}
+            by Young Tran
+          </span>
+        </div>
+      </Hidden>
 
       <Parallax ref={(ref) => (parallax.current = ref)} pages={5}>
         <SpringBg />
-        <Header />
-        <About />
-        <Experience />
-        <WorkTest />
 
+        <Header style={{ gridArea: "header" }} />
+
+        <About style={{ gridArea: "about" }} />
+        <Experience style={{ gridArea: "experience" }} />
+        <Work repos={repos} style={{ gridArea: "work" }} />
+        <Contact style={{ gridArea: "contact" }} />
         <ParallaxLayer
           offset={4.7}
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            cursor: "pointer",
           }}
         >
           <img
             src={url("earth")}
-            style={{ width: "60%" }}
+            style={{
+              width: "60%",
+            }}
+            className="keyblade"
             onClick={() => parallax.current.scrollTo(0)}
+            alt="earth"
           />
         </ParallaxLayer>
-        <Contact />
       </Parallax>
 
       <Hidden mdUp>

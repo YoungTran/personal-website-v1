@@ -1,9 +1,9 @@
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import React, { useState } from "react";
 import { animated, useSpring } from "react-spring";
-import { parallax } from "../../App";
+import { parallax, themeColors } from "../App";
 
-export default function DoubleArrowDown({ nextPage }) {
+export default function DoubleArrowDown({ nextPage, marginTop }) {
   const [state, toggle] = useState(true);
   const { x } = useSpring({
     from: { x: 0 },
@@ -13,7 +13,11 @@ export default function DoubleArrowDown({ nextPage }) {
   return (
     <div
       onClick={() => toggle(!state)}
-      style={{ display: "flex", justifyContent: "center", marginTop: "30%" }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: marginTop ? marginTop : "20%",
+      }}
     >
       <animated.div
         onClick={() => parallax.current.scrollTo(nextPage)}
@@ -28,8 +32,13 @@ export default function DoubleArrowDown({ nextPage }) {
         }}
       >
         <ArrowDownwardIcon
-          style={{ fontSize: "5rem", opacity: 0.5, cursor: "pointer" }}
-          className="down-arrow"
+          style={{
+            fontSize: "5rem",
+            opacity: 0.5,
+
+            color: themeColors.fifth.color,
+          }}
+          className="down-arrow keyblade"
         />
       </animated.div>
     </div>

@@ -1,20 +1,21 @@
 import { Button } from "@material-ui/core";
 import React from "react";
-import { themeColors } from "../../App";
+import { parallax, themeColors } from "../App";
 
 export default function CTAButton() {
   return (
     <Button
       variant="contained"
       margin="dense"
+      onClick={() => parallax.current.scrollTo(4)}
       style={{
         marginTop: "2rem",
-        color: "#fff",
+        color: themeColors.fifth.color,
         fontWeight: 600,
-        backgroundColor: themeColors.first.color,
+        backgroundColor: "#CC4F51",
       }}
     >
-      Reach Out
+      Send Me a Message
     </Button>
   );
 }

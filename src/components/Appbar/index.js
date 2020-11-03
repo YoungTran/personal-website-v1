@@ -1,17 +1,13 @@
-import { Hidden } from "@material-ui/core";
+import { Fade, Hidden } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import { Menu } from "@material-ui/icons";
-import { default as ChevronLeftIcon } from "@material-ui/icons/ChevronLeft";
 import clsx from "clsx";
-import React from "react";
-import logo from "../../../logo.svg";
-import { mainListItems } from "../listItems";
+import React, { useEffect, useState } from "react";
+import { themeColors } from "../../App";
+import logo from "../../logo.svg";
+import { MainListItems } from "../listItems";
 
 const drawerWidth = 240;
 
@@ -38,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: "#637497",
+    backgroundColor: themeColors.first.color,
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -65,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
+    background: themeColors.fourth.color,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -113,7 +110,14 @@ export default function Appbar({ parallax }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const isHome = window.location.pathname === "/";
+  const [isMounted, setIsMounted] = useState(!isHome);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsMounted(true);
+    }, 150);
+  }, []);
   return (
     <>
       <AppBar
@@ -123,18 +127,17 @@ export default function Appbar({ parallax }) {
         <Toolbar className={classes.toolbar}>
           <div>
             <Hidden smDown>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                className={clsx(
-                  classes.menuButton,
-                  open && classes.menuButtonHidden
-                )}
-              >
-                <Menu />
-              </IconButton>
+              {isMounted && (
+                <Fade in={true} timeout={{ enter: 2000 }}>
+                  <li style={{ listStyle: "none" }}>
+                    <IconButton onClick={() => parallax.current.scrollTo(0)}>
+                      <Hidden smDown>
+                        <img src={logo} className="App-logo" alt="logo" />
+                      </Hidden>
+                    </IconButton>
+                  </li>
+                </Fade>
+              )}
             </Hidden>
             <Hidden mdUp>
               <IconButton
@@ -151,18 +154,15 @@ export default function Appbar({ parallax }) {
               </IconButton>
             </Hidden>
           </div>
-          <IconButton onClick={() => parallax.current.scrollTo(0)}>
-            <Hidden smDown>
-              <img src={logo} className="App-logo" alt="logo" />
-            </Hidden>
-          </IconButton>
+          <Hidden smDown>
+            <MainListItems />
+          </Hidden>
         </Toolbar>
       </AppBar>
 
-      <Hidden smDown>
+      {/* <Hidden smDown>
         <Drawer
           variant="permanent"
-          hideBackdrop={true}
           classes={{
             paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
           }}
@@ -178,6 +178,7 @@ export default function Appbar({ parallax }) {
           <Divider />
         </Drawer>
       </Hidden>
+     */}
     </>
   );
 }
