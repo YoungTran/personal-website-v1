@@ -32,12 +32,12 @@ export const themeColors = {
     color: "#F9F9FA",
   },
 };
-const url = (name, wrap = false) =>
-  `${
-    wrap ? "url(" : ""
-  }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
-    wrap ? ")" : ""
-  }`;
+// const url = (name, wrap = false) =>
+//   `${
+//     wrap ? "url(" : ""
+//   }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
+//     wrap ? ")" : ""
+//   }`;
 
 function App() {
   const fetchRepo = async () => {
