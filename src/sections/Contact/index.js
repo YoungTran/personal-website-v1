@@ -4,6 +4,11 @@ import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { themeColors } from "../../App";
 import { url } from "../../components/SpringBg";
 
+const encode = (data) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -24,6 +29,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Contact({ winSize }) {
   const classes = useStyles();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.name.value);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": "contact",
+        name: e.target.name.value,
+        email: e.target.email.value,
+        message: e.target.message.value,
+      }),
+    })
+      .then(() => alert("Success!"))
+      .catch((error) => alert(error));
+
+    e.preventDefault();
+  };
   return (
     <ParallaxLayer offset={winSize.width < 959 ? 4.2 : 4} speed={1.2}>
       <div className={classes.root}>
@@ -43,8 +66,12 @@ export default function Contact({ winSize }) {
           name="contact"
           method="POST"
           data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
           style={{ marginTop: "4rem" }}
         >
+          <input type="hidden" name="form-name" value="contact" />
+
           <p>
             <label>
               Your Name: <TextField type="text" name="name" />

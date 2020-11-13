@@ -82,7 +82,7 @@ function App() {
             justifyContent: "center",
           }}
         >
-          <img
+          {/* <img
             src={url("earth")}
             style={{
               width: winSize.width < 959 ? "100%" : "60%",
@@ -90,7 +90,7 @@ function App() {
             className="keyblade"
             onClick={() => parallax.current.scrollTo(0)}
             alt="earth"
-          />
+          /> */}
         </ParallaxLayer>
       </Parallax>
 
