@@ -1,5 +1,6 @@
 import React from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
+import { useWindowSize } from "../components/BottomNav";
 export const url = (name, wrap = false) =>
   `${
     wrap ? "url(" : ""
@@ -7,6 +8,7 @@ export const url = (name, wrap = false) =>
     wrap ? ")" : ""
   }`;
 export default function SpringBg() {
+  const winSize = useWindowSize();
   return (
     <div>
       <ParallaxLayer
@@ -75,7 +77,10 @@ export default function SpringBg() {
       >
         <img
           src={url("satellite4")}
-          style={{ width: "20%", marginLeft: "60%" }}
+          style={{
+            width: "20%",
+            marginLeft: winSize.width < 959 ? "75%" : "60%",
+          }}
           alt="satellite4"
         />
       </ParallaxLayer>

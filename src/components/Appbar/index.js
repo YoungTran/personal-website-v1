@@ -7,7 +7,7 @@ import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { themeColors } from "../../App";
 import logo from "../../logo.svg";
-import { MainListItems } from "../listItems";
+import { MainListItems } from "../SpringTabs";
 
 const drawerWidth = 240;
 
@@ -103,18 +103,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Appbar({ parallax }) {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const [open] = React.useState(false);
+
   const isHome = window.location.pathname === "/";
   const [isMounted, setIsMounted] = useState(!isHome);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       setIsMounted(true);
     }, 150);
   }, []);
@@ -159,26 +154,6 @@ export default function Appbar({ parallax }) {
           </Hidden>
         </Toolbar>
       </AppBar>
-
-      {/* <Hidden smDown>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-        </Drawer>
-      </Hidden>
-     */}
     </>
   );
 }

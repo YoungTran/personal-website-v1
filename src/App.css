@@ -84,43 +84,21 @@
 .keyblade {
   cursor: url(https://cur.cursors-4u.net/games/gam-2/gam134.cur), auto !important;
 }
-.fadeup-enter {
-  opacity: 0.01;
-  transform: translateY(20px);
-  transition: opacity 300ms var(--easing), transform 300ms var(--easing);
-}
-
-.fadeup-enter-active {
-  opacity: 1;
-  transform: translateY(0px);
-  transition: opacity 300ms var(--easing), transform 300ms var(--easing);
-}
-
-/* Fade down */
-.fadedown-enter {
-  opacity: 0.01;
-  transform: translateY(-20px);
-  transition: opacity 300ms var(--easing), transform 300ms var(--easing);
-}
-
-.fadedown-enter-active {
-  opacity: 1;
-  transform: translateY(0px);
-  transition: opacity 300ms var(--easing), transform 300ms var(--easing);
-}
-
-/* Fade */
-.fade-enter {
+.fade-in-section {
   opacity: 0;
+
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out,
+    visibility 1200ms ease-out;
+  will-change: opacity, transform, visibility;
 }
-.fade-enter-active {
+.fade-in-section.is-visible {
   opacity: 1;
-  transition: opacity 300ms var(--easing);
+  transform: none;
+  visibility: visible;
 }
-.fade-exit {
-  opacity: 1;
-}
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 300ms var(--easing);
+
+a {
+  text-decoration: none;
+  color: #fff;
 }

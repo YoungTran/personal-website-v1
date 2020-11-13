@@ -2,7 +2,7 @@ import { makeStyles, TextField } from "@material-ui/core";
 import React from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { themeColors } from "../../App";
-import { url } from "../SpringBg";
+import { url } from "../../components/SpringBg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Contact() {
+export default function Contact({ winSize }) {
   const classes = useStyles();
   return (
-    <ParallaxLayer offset={4} speed={1.2}>
+    <ParallaxLayer offset={winSize.width < 959 ? 4.2 : 4} speed={1.2}>
       <div className={classes.root}>
         <img
           src={url("cloud")}
@@ -37,6 +37,7 @@ export default function Contact() {
             right: 0,
             width: "100%",
           }}
+          alt="contact-cloud"
         />
         <form
           name="contact"

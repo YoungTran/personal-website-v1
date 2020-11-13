@@ -1,16 +1,17 @@
 import { Hidden } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Parallax, ParallaxLayer } from "react-spring/renderprops-addons";
+import { getRepos } from "./api/getRepos";
 import "./App.css";
-import About from "./components/About";
-import { getRepos } from "./components/api/getRepos";
 import Appbar from "./components/Appbar";
-import BottomNav from "./components/BottomNav";
-import Contact from "./components/Contact";
-import Experience from "./components/Experience";
-import Header from "./components/Header";
+import AsideText from "./components/AsideText";
+import BottomNav, { useWindowSize } from "./components/BottomNav";
 import SpringBg from "./components/SpringBg";
-import Work from "./components/Work";
+import About from "./sections/About";
+import Contact from "./sections/Contact";
+import Experience from "./sections/Experience";
+import Header from "./sections/Header";
+import Projects from "./sections/Projects";
 
 export const parallax = React.createRef();
 
@@ -50,7 +51,7 @@ function App() {
       setRepos(res);
     });
   }, []);
-
+  const winSize = useWindowSize();
   return (
     <div
       style={{
@@ -60,31 +61,21 @@ function App() {
     >
       <Appbar parallax={parallax} />
       <Hidden smDown>
-        <div className="side">
-          <span style={{ color: themeColors.fifth.color, fontWeight: 600 }}>
-            Made with{" "}
-          </span>
-          <span className="heart" role="img" aria-label="heart-emoji">
-            ❤️
-          </span>
-          <span style={{ color: themeColors.fifth.color, fontWeight: 600 }}>
-            {" "}
-            by Young Tran
-          </span>
-        </div>
+        <AsideText themeColors={themeColors} />
       </Hidden>
 
       <Parallax ref={(ref) => (parallax.current = ref)} pages={5}>
         <SpringBg />
 
-        <Header style={{ gridArea: "header" }} />
+        <Header />
 
-        <About style={{ gridArea: "about" }} />
-        <Experience style={{ gridArea: "experience" }} />
-        <Work repos={repos} style={{ gridArea: "work" }} />
-        <Contact style={{ gridArea: "contact" }} />
+        <About />
+        <Experience winSize={winSize} />
+
+        <Projects repos={repos} winSize={winSize} />
+        <Contact winSize={winSize} />
         <ParallaxLayer
-          offset={4.7}
+          offset={winSize.width < 959 ? 4.5 : 4.7}
           style={{
             display: "flex",
             alignItems: "center",
@@ -94,7 +85,7 @@ function App() {
           <img
             src={url("earth")}
             style={{
-              width: "60%",
+              width: winSize.width < 959 ? "100%" : "60%",
             }}
             className="keyblade"
             onClick={() => parallax.current.scrollTo(0)}
@@ -104,7 +95,7 @@ function App() {
       </Parallax>
 
       <Hidden mdUp>
-        <BottomNav />
+        <BottomNav parallax={parallax} />
       </Hidden>
     </div>
   );

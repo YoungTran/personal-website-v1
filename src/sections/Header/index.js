@@ -1,30 +1,12 @@
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { Grid, Hidden, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { animated, useTrail } from "react-spring";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
-import { themeColors } from "../App";
-import CTAButton from "./CTAButton";
-import DoubleArrowDown from "./DoubleArrowDown";
+import { themeColors } from "../../App";
+import CTAButton from "../../components/CTAButton";
+import DoubleArrowDown from "../../utils/DoubleArrowDown";
 
 const config = { mass: 5, tension: 2000, friction: 200 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "1000px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    [theme.breakpoints.up("sm")]: {
-      // marginTop: "4rem",
-      marginLeft: "3rem",
-      // textAlign: "left",
-      // padding: "4rem",
-      // maxWidth: "1000px",
-    },
-    [theme.breakpoints.up("lg")]: { marginTop: "10rem" },
-  },
-}));
 
 export default function Header() {
   const items = [
@@ -74,7 +56,7 @@ export default function Header() {
       },
     },
   ];
-  const [toggle, set] = useState(true);
+  const [toggle] = useState(true);
   const trail = useTrail(items.length, {
     config,
     opacity: toggle ? 1 : 0,
@@ -82,7 +64,7 @@ export default function Header() {
     height: toggle ? 80 : 0,
     from: { opacity: 0, x: 20, height: 0 },
   });
-  const classes = useStyles();
+
   return (
     <ParallaxLayer offset={0} speed={1.2}>
       <Grid
@@ -114,8 +96,9 @@ export default function Header() {
         ))}
 
         <CTAButton />
-
-        <DoubleArrowDown nextPage={1} />
+        <Hidden smDown>
+          <DoubleArrowDown nextPage={0.9} />
+        </Hidden>
       </Grid>
     </ParallaxLayer>
   );

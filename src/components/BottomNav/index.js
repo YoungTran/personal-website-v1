@@ -6,7 +6,6 @@ import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 import FaceIcon from "@material-ui/icons/Face";
 import React, { useEffect, useState } from "react";
-import { parallax } from "../App";
 
 const useStyles = makeStyles({
   root: {
@@ -47,7 +46,7 @@ export function useWindowSize() {
   return windowSize;
 }
 
-export default function BottomNav() {
+export default function BottomNav({ parallax }) {
   const classes = useStyles();
   const [value, setValue] = React.useState("about");
 
