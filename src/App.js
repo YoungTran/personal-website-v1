@@ -73,7 +73,7 @@ function App() {
         <Experience winSize={winSize} />
 
         <Projects repos={repos} winSize={winSize} />
-        <Contact winSize={winSize} />
+
         <ParallaxLayer
           offset={winSize.width < 959 ? 4.5 : 4.7}
           style={{
@@ -92,6 +92,7 @@ function App() {
             alt="earth"
           /> */}
         </ParallaxLayer>
+        <Contact winSize={winSize} />
       </Parallax>
 
       <Hidden mdUp>

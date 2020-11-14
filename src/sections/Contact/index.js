@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { Button, makeStyles, TextField } from "@material-ui/core";
 import React from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { url } from "../../components/SpringBg";
@@ -19,13 +19,15 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up("lg")]: { marginLeft: "5rem", marginTop: "5rem" },
   },
+  input: {
+    width: "300px",
+    marginTop: theme.spacing(4),
+  },
 }));
 
 export default function Contact({ winSize }) {
   const classes = useStyles();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+
   return (
     <ParallaxLayer offset={winSize.width < 959 ? 4.2 : 4} speed={1.2}>
       <div className={classes.root}>
@@ -42,30 +44,38 @@ export default function Contact({ winSize }) {
           alt="contact-cloud"
         />
         <form
+          action="/contact"
           name="contact"
-          method="POST"
+          method="post"
           data-netlify="true"
-          onSubmit={handleSubmit}
+          style={{ marginTop: "6rem" }}
         >
-          <p>
-            <label>
-              Your Name: <input type="text" name="name" />
-            </label>
-          </p>
-          <p>
-            <label>
-              Your Email: <input type="email" name="email" />
-            </label>
-          </p>
+          <input type="hidden" name="form-name" value="contact" />
 
-          <p>
-            <label>
-              Message: <textarea name="message"></textarea>
-            </label>
-          </p>
-          <p>
-            <button type="submit">Send</button>
-          </p>
+          <div className={classes.input}>
+            <TextField variant="outlined" label="Name" name="name" fullWidth />
+          </div>
+          <div className={classes.input}>
+            <TextField
+              variant="outlined"
+              label="Email"
+              name="email"
+              fullWidth
+            />
+          </div>
+          <div className={classes.input}>
+            <TextField
+              variant="outlined"
+              label="Message"
+              name="message"
+              multiline
+              rows={10}
+              fullWidth
+            />
+          </div>
+          <Button variant="outlined" type="submit" color="primary">
+            Send
+          </Button>
         </form>
       </div>
     </ParallaxLayer>
