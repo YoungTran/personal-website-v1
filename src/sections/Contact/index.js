@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     width: "300px",
     marginTop: theme.spacing(4),
   },
+  submitButton: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function Contact({ winSize }) {
@@ -73,9 +76,11 @@ export default function Contact({ winSize }) {
               fullWidth
             />
           </div>
-          <Button variant="outlined" type="submit" color="primary">
-            Send
-          </Button>
+          <div className={classes.submitButton}>
+            <Button variant="outlined" type="submit" color="primary">
+              Send
+            </Button>
+          </div>
         </form>
       </div>
     </ParallaxLayer>
