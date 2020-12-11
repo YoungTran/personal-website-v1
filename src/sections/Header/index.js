@@ -76,9 +76,8 @@ export default function Header() {
         style={{ marginTop: "6rem", padding: "2rem" }}
       >
         {trail.map(({ x, height, ...rest }, index) => (
-          <Grid item xs={12} style={{ textAlign: "center" }}>
+          <Grid key={index} item xs={12} style={{ textAlign: "center" }}>
             <animated.div
-              key={items[index]}
               className="trails-text"
               style={{
                 ...rest,

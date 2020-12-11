@@ -1,6 +1,7 @@
-import { Hidden } from "@material-ui/core";
+import { createMuiTheme, Hidden } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Parallax, ParallaxLayer } from "react-spring/renderprops-addons";
+import { ThemeProvider } from "styled-components";
 import { getRepos } from "./api/getRepos";
 import "./App.css";
 import Appbar from "./components/Appbar";
@@ -39,6 +40,12 @@ export const themeColors = {
 //     wrap ? ")" : ""
 //   }`;
 
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+  },
+});
+
 function App() {
   const fetchRepo = async () => {
     const repos = await getRepos();
@@ -53,36 +60,37 @@ function App() {
   }, []);
   const winSize = useWindowSize();
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: themeColors.third.color,
-      }}
-    >
-      <Appbar parallax={parallax} />
-      <Hidden smDown>
-        <AsideText themeColors={themeColors} />
-      </Hidden>
+    <ThemeProvider theme={darkTheme}>
+      <div
+        style={{
+          minHeight: "100vh",
+          backgroundColor: themeColors.third.color,
+        }}
+      >
+        <Appbar parallax={parallax} />
+        <Hidden smDown>
+          <AsideText themeColors={themeColors} />
+        </Hidden>
 
-      <Parallax ref={(ref) => (parallax.current = ref)} pages={5}>
-        <SpringBg />
+        <Parallax ref={(ref) => (parallax.current = ref)} pages={5}>
+          <SpringBg />
 
-        <Header />
+          <Header />
 
-        <About />
-        <Experience winSize={winSize} />
+          <About />
+          <Experience winSize={winSize} />
 
-        <Projects repos={repos} winSize={winSize} />
+          <Projects repos={repos} winSize={winSize} />
 
-        <ParallaxLayer
-          offset={winSize.width < 959 ? 4.5 : 4.7}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {/* <img
+          <ParallaxLayer
+            offset={winSize.width < 959 ? 4.5 : 4.7}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {/* <img
             src={url("earth")}
             style={{
               width: winSize.width < 959 ? "100%" : "60%",
@@ -91,14 +99,15 @@ function App() {
             onClick={() => parallax.current.scrollTo(0)}
             alt="earth"
           /> */}
-        </ParallaxLayer>
-        <Contact winSize={winSize} />
-      </Parallax>
+          </ParallaxLayer>
+          <Contact winSize={winSize} />
+        </Parallax>
 
-      <Hidden mdUp>
-        <BottomNav parallax={parallax} />
-      </Hidden>
-    </div>
+        <Hidden mdUp>
+          <BottomNav parallax={parallax} />
+        </Hidden>
+      </div>
+    </ThemeProvider>
   );
 }
 

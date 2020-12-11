@@ -34,9 +34,10 @@ export default function Tools() {
         marginTop: "2rem",
       }}
     >
-      {skills.map((text) => {
+      {skills.map((text, idx) => {
         return (
           <Grid
+            key={idx}
             style={{
               display: "flex",
               flexDirection: "row",

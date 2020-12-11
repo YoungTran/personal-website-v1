@@ -59,7 +59,6 @@ export default function BottomNav({ parallax }) {
     <BottomNavigation
       value={value}
       onChange={handleChange}
-      position
       className={classes.root}
     >
       <BottomNavigationAction

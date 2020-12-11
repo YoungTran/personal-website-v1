@@ -36,7 +36,7 @@ export const MainListItems = (props) => {
     { navText: "About", TabIcon: FaceIcon, pageNum: 0.9 },
     { navText: "Experience", TabIcon: AssignmentIcon, pageNum: 2 },
     { navText: "Work", TabIcon: BusinessCenterIcon, pageNum: 3 },
-    { navText: "Contact", TabIcon: ContactMailIcon, pageNum: 4 },
+    { navText: "Contact", TabIcon: ContactMailIcon, pageNum: 3.9 },
   ];
 
   return (
@@ -45,7 +45,7 @@ export const MainListItems = (props) => {
         navItems.map((navItem, i) => {
           const { navText, TabIcon, pageNum } = navItem;
           return (
-            <Fade in={true} timeout={{ enter: i * 1000 }}>
+            <Fade in={true} timeout={{ enter: i * 1000 }} key={i}>
               <li
                 style={{
                   listStyle: "none",

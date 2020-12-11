@@ -54,8 +54,8 @@ export default function About() {
           justify="center"
         >
           <Grid item lg={6} md={8} sm={8} style={{ color: "#fff" }} xs={8}>
-            {items.map((item) => (
-              <Typography variant={item.element} style={item.style}>
+            {items.map((item, idx) => (
+              <Typography variant={item.element} style={item.style} key={idx}>
                 {item.text}
               </Typography>
             ))}

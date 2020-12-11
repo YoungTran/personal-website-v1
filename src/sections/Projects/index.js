@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Hidden, Typography } from "@material-ui/core";
 import React from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { themeColors } from "../../App";
@@ -11,7 +11,7 @@ export default function Projects({ repos, winSize }) {
     const { html_url, name } = repos;
     return { name, html_url };
   });
-  const firstEight = projects.slice(0, 8);
+  const firstEight = projects.slice(0, 5);
   const projectsToShow = firstEight;
   return (
     <ParallaxLayer offset={winSize.width < 959 ? 3.1 : 3.2} speed={1}>
@@ -79,7 +79,9 @@ export default function Projects({ repos, winSize }) {
             </Grid>
           </FadeInSection>
         </Grid>
-        <DoubleArrowDown nextPage={4} />
+        <Hidden smDown>
+          <DoubleArrowDown nextPage={4} />
+        </Hidden>
       </Grid>
     </ParallaxLayer>
   );
